@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adobe Journey Optimizer Loyalty · Interactive Demo</title>
+  <meta name="description" content="See how Luma turns everyday actions into loyalty with Adobe Journey Optimizer Loyalty. Design a challenge, change the customer, and watch the experience adapt instantly." />
+  <link rel="stylesheet" href="css/styles.css?v=5" />
+</head>
+<body>
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="shell">
+      <div class="header-top">
+        <div>
+          <p class="eyebrow">Adobe Journey Optimizer&nbsp;·&nbsp;Loyalty</p>
+          <h1>See how Luma turns everyday<br class="br-desktop" /> actions into loyalty</h1>
+          <p class="subhead">Design a loyalty challenge, change who's shopping, and watch the customer experience adapt in real time.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <!-- ===================== TOP JOURNEY BAR (Step 4 lives here) ===================== -->
+    <section class="journey" id="journey" aria-label="Move through the journey">
+      <div class="journey-head">
+        <p class="journey-eyebrow">Move through the journey</p>
+        <p class="journey-sub">Click a moment in the member's journey and watch every part of the experience react.</p>
+      </div>
+      <div class="journey-steps" id="journey-steps"></div>
+    </section>
+
+    <!-- ===================== DEMO ===================== -->
+    <section class="layout" id="panel-demo">
+      <!-- ---------- LEFT: CONFIG (collapsible steps 1-3) ---------- -->
+      <aside class="controls" aria-label="Configure the demo">
+        <p class="col-cap"><span class="col-num">1</span> The marketer configures this (no code)</p>
+
+        <!-- 1. DESIGN THE CHALLENGE -->
+        <details class="card" open>
+          <summary class="card-head">
+            <span class="card-step">Step 1&nbsp;·&nbsp;Design the challenge</span>
+            <span class="chev" aria-hidden="true">›</span>
+          </summary>
+          <div class="card-body">
+            <h2 class="card-title">What should members do?</h2>
+            <p class="card-sub">This is the marketer's view in AJO Loyalty. Pick the type of gamified challenge.</p>
+
+            <label class="field-label">Challenge type</label>
+            <div class="segment" id="ctl-type" role="group" aria-label="Challenge type">
+              <button class="seg active" data-type="standard">Standard</button>
+              <button class="seg" data-type="streak">Streak</button>
+              <button class="seg" data-type="sequential">Sequential</button>
+            </div>
+            <p class="hint" id="type-hint"></p>
+
+            <label class="field-label" id="tasks-label">Tasks members can complete</label>
+            <div class="tasklist" id="ctl-tasks"></div>
+
+            <div class="stepper-row" id="stepper-row">
+              <label class="field-label" id="req-label" for="ctl-required">Tasks needed to earn the reward</label>
+              <div class="stepper">
+                <button id="req-minus" aria-label="Fewer">−</button>
+                <span id="ctl-required">3</span>
+                <button id="req-plus" aria-label="More">+</button>
+              </div>
+            </div>
+            <p class="type-note" id="type-note" style="display:none"></p>
+          </div>
+        </details>
+
+        <!-- 2. REWARD -->
+        <details class="card">
+          <summary class="card-head">
+            <span class="card-step">Step 2&nbsp;·&nbsp;Set the reward</span>
+            <span class="chev" aria-hidden="true">›</span>
+          </summary>
+          <div class="card-body">
+            <h2 class="card-title">What do they earn?</h2>
+
+            <label class="field-label">Reward type</label>
+            <div class="segment" id="ctl-reward" role="group" aria-label="Reward type">
+              <button class="seg active" data-reward="points">Points</button>
+              <button class="seg" data-reward="miles">Miles</button>
+              <button class="seg" data-reward="coupon">Coupon</button>
+            </div>
+
+            <div class="reward-amount-row" id="reward-amount-row">
+              <label class="field-label" for="ctl-amount">Amount</label>
+              <input type="range" id="ctl-amount" min="100" max="1000" step="50" value="500" />
+              <output id="amount-out">500 points</output>
+            </div>
+
+            <label class="field-label">When is it delivered?</label>
+            <div class="radio-row" id="ctl-delivery">
+              <label class="radio active"><input type="radio" name="delivery" value="completion" checked /> On challenge completion</label>
+              <label class="radio"><input type="radio" name="delivery" value="milestones" /> At each task milestone</label>
+            </div>
+          </div>
+        </details>
+
+        <!-- 3. CUSTOMER -->
+        <details class="card">
+          <summary class="card-head">
+            <span class="card-step">Step 3&nbsp;·&nbsp;Choose the customer</span>
+            <span class="chev" aria-hidden="true">›</span>
+          </summary>
+          <div class="card-body">
+            <h2 class="card-title">Who's shopping?</h2>
+            <p class="card-sub">The same challenge adapts to each member's tier, balance and history.</p>
+
+            <label class="field-label">Persona</label>
+            <div class="persona-picker" id="ctl-persona"></div>
+
+            <label class="field-label">Luma+ loyalty tier</label>
+            <div class="segment tier-segment" id="ctl-tier" role="group" aria-label="Loyalty tier">
+              <button class="seg" data-tier="none">Not a member</button>
+              <button class="seg active" data-tier="member">Member</button>
+              <button class="seg" data-tier="silver">Silver</button>
+              <button class="seg" data-tier="gold">Gold</button>
+            </div>
+          </div>
+        </details>
+      </aside>
+
+      <!-- ---------- RIGHT: LIVE EXPERIENCE ---------- -->
+      <div class="experience" aria-label="Live customer experience">
+        <p class="col-cap"><span class="col-num">2</span> The customer experience, generated automatically</p>
+        <div class="exp-head">
+          <p class="eyebrow" id="exp-eyebrow">Luma loyalty experience</p>
+          <h2 class="exp-title" id="exp-title">Luma Points Rush</h2>
+          <p class="exp-based" id="exp-based"></p>
+          <div class="chips" id="exp-chips"></div>
+        </div>
+
+        <p class="channel-label">Shown across channels</p>
+        <div class="channels">
+          <div class="channel-col phone-col">
+            <p class="mini-label">Mobile app, content card</p>
+            <div class="phone">
+              <div class="phone-top"><span>9:41</span><span>Luma</span><span>•••</span></div>
+              <div class="phone-body" id="phone-card"></div>
+            </div>
+          </div>
+          <div class="channel-col">
+            <p class="mini-label">Website, luma.com</p>
+            <div class="browser">
+              <div class="browser-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">luma.com/rewards</span></div>
+              <div class="browser-body" id="web-card"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lifecycle messaging, tied to the current journey moment -->
+        <div class="lifecycle">
+          <div class="lifecycle-head">
+            <p class="mini-label">Automated lifecycle message</p>
+            <span class="lc-moment">sent <b id="lc-moment-label">the moment they join</b></span>
+          </div>
+          <p class="lc-caption">AJO generates the journey and fires the right message on the right channel automatically. No campaign to build by hand.</p>
+          <div class="message-cards" id="message-cards"></div>
+        </div>
+
+        <div class="tierwidget" id="tier-widget"></div>
+
+        <details class="bts" id="bts">
+          <summary>Why did Adobe do this? <span class="chev">›</span></summary>
+          <div class="bts-body" id="bts-body"></div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <p>A concept experience for Adobe Journey Optimizer Loyalty · Luma is Adobe's fictional demo brand · Adobe 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js?v=5"></script>
+</body>
+</html>
