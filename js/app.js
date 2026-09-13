@@ -7,9 +7,9 @@
 // ---------------- Data ----------------
 
 const PERSONAS = {
-  marcus: { name: "Marcus Webb",    age: 30, interest: "Performance & running",     initials: "MW", img: "assets/persona-marcus.jpg", defaultTier: "member", offset: 240 },
-  anna:   { name: "Anna Kowalska",  age: 27, interest: "Yoga & studio classes",     initials: "AK", img: "assets/persona-anna.jpg",   defaultTier: "silver", offset: 300 },
-  lukas:  { name: "Lukas Bergmann", age: 42, interest: "Premium activewear",        initials: "LB", img: "assets/persona-lukas.jpg",  defaultTier: "gold",   offset: 420 },
+  marcus: { name: "Marcus Webb",    age: 30, interest: "Performance & running",     img: "assets/persona-marcus.jpg", defaultTier: "member", offset: 240 },
+  anna:   { name: "Anna Kowalska",  age: 27, interest: "Yoga & studio classes",     img: "assets/persona-anna.jpg",   defaultTier: "silver", offset: 300 },
+  lukas:  { name: "Lukas Bergmann", age: 42, interest: "Premium activewear",        img: "assets/persona-lukas.jpg",  defaultTier: "gold",   offset: 420 },
 };
 
 // tasks differ per challenge type, all in the Luma fitness/yoga/fashion world
@@ -232,7 +232,7 @@ function renderControls() {
     const on = state.persona === id;
     const node = el("button", "persona" + (on ? " on" : ""));
     node.setAttribute("aria-pressed", on);
-    node.innerHTML = `<span class="avatar" style="background-image:url('${p.img}')">${p.initials}</span>
+    node.innerHTML = `<span class="avatar" style="background-image:url('${p.img}')"></span>
       <span class="p-txt"><span class="p-name">${p.name}</span><span class="p-meta">${p.age} · ${p.interest}</span></span>`;
     node.addEventListener("click", () => { state.persona = id; state.tier = p.defaultTier; render(); });
     pp.appendChild(node);
